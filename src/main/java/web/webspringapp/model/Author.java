@@ -2,10 +2,7 @@ package web.webspringapp.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor

@@ -3,9 +3,7 @@ package web.webspringapp.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @NoArgsConstructor
@@ -21,7 +19,7 @@ public class Novel {
     private String title;
 
     @Column (name = "Megjelenés")
-    private int published;
+    private int year;
     @Column (name = "Nyelv")
     private String language;
 
