@@ -73,4 +73,14 @@ public class AuthorController {
         }
     }
 
+    @DeleteMapping("/deleteauthor/{id}")
+    public ResponseEntity<Void> deleteAuthor(@PathVariable Long id) {
+        if (!authorRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        authorRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

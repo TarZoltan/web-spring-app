@@ -68,4 +68,14 @@ public class NovelController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+    @DeleteMapping("/deletenovel/{id}")
+    public ResponseEntity<Void> deleteNovel(@PathVariable Long id) {
+        if (!novelRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        novelRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
 }
