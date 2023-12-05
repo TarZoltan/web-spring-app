@@ -3,10 +3,7 @@ package web.webspringapp.controller;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import web.webspringapp.dto.NovelDTO;
 import web.webspringapp.model.Novel;
 import web.webspringapp.repository.NovelRepository;
@@ -46,5 +43,29 @@ public class NovelController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(novelDTOs);
+    }
+
+    @PutMapping("/updatenovel/{id}")
+    public ResponseEntity<NovelDTO> updateNovel(
+            @PathVariable Long id,
+            @RequestBody NovelDTO updatedNovelDTO) {
+
+        if (!novelRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Novel existingNovel = novelRepository.findById(id).orElse(null);
+        if (existingNovel != null) {
+            existingNovel.setYear(updatedNovelDTO.getYear());
+            existingNovel.setLanguage(updatedNovelDTO.getLanguage());
+            existingNovel.setTitle(updatedNovelDTO.getTitle());
+
+            Novel updatedNovel = novelRepository.save(existingNovel);
+
+            NovelDTO responseNovelDTO = modelMapper.map(updatedNovel, NovelDTO.class);
+            return ResponseEntity.ok(responseNovelDTO);
+        } else {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
