@@ -8,6 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 public class NovelDTO {
     private Long id;
+
+    private String title;
     private int year;
     private String language;
 }
