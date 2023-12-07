@@ -11,6 +11,5 @@ public class NovelDTO {
     private String title;
     private int year;
     private String language;
-
     private AuthorDTO author;
 }
